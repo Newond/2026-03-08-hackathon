@@ -1,0 +1,664 @@
+あなたは優秀なハッカソンのスペシャリストです。
+
+私とエンジニアの友人は明日こちらのハッカソンに"AI Guidance for Physical Work"で発表を行います。
+その際に私たちは以下のようなものを作ろうとしています。方向性が合ってるかの確認と、入賞を目指したり将来的にYCに採択されるようにするためにどうしたらいいかを教えてください。
+
+### 作ろうとしているもの
+介護職の人もしくは自宅で介護をする人がどのように介護したらいいかをスマホのカメラで骨格判定し、正しい方法をブルートゥースイヤホンなどから音声でコーチングしてくれるサービス
+
+### RFSの詳細
+AI Guidance for Physical Work#
+By David Lieb
+
+You know that scene in The Matrix, where Neo plugs a cable into the back of his head and wakes up a while later and says "I know Kung Fu"? Physical work is about to get something similar – not through brain implants, but through real-time AI guidance.
+
+Much of the AI conversation focuses on which desk jobs will get replaced. But for physical work—stuff like field services, manufacturing, healthcare—AI can't yet act in the world. What it can do is see, reason, and guide the human who does.
+
+Imagine wearing a small camera while an AI sees what you see and talks you through the job: "turn off that valve", "use the ⅜ inch wrench", "that part looks worn, replace it". Instead of needing months or years of training, workers can become effective immediately, with AI coaching them and accessing new skills when needed.
+
+Why now? Three things have converged. First, multimodal models can now see and reason about real-world situations reliably. Second, the hardware is already everywhere – phones, AirPods, Smart Glasses. And third, skilled labor shortages make this economically urgent and a high wage job for millions of people.
+
+There are a few approaches you could take. The most obvious is to build this system and sell it to companies with existing workforces. Or, you could pick a vertical, like HVAC repair or nursing, and build a full-stack superpowered workforce. Or, you could build a platform that lets anyone sign up and become a skilled worker or start their own business.
+
+If you're interested in giving physical workers the same type of AI superpowers that Claude Code gives you, we'd love to see you apply.
+
+### 明日のハッカソンのイベントページ
+
+Events
+Calendars
+Discover
+3:07 PM GMT+9
+Create Event
+
+
+Cover Image for c0mpiled-7/sanfransokyo
+Cover Image for c0mpiled-7/sanfransokyo
+Avatar for c0mpiled
+Presented by
+c0mpiled
+
+c0mpiled is a builder-focused gathering for people who ship. We prototype and experiment across software, AI, and design—grounded in a simple belief: you can just do things.
+
+Hosted By
+Kyosuke Togami
+Hal Morimoto
+Hiroki Matsuda
+James Tan
+Henry Ndubuaku
+Sabba Petri
+Lucas Fedronic
+
+Contact the Host
+
+Report Event
+AI
+Tokyo
+Featured in 
+Tokyo
+c0mpiled-7/sanfransokyo
+Mar
+8
+Sunday, March 8
+9:00 AM - 7:00 PM
+虎ノ門ヒルズ森タワー
+Minato City, Tokyo
+Starting in 17h 52m
+You’re In
+
+Add to Calendar
+
+
+
+Invite a Friend
+No longer able to attend? Notify the host by canceling your registration.
+Profile Complete · Reminder: Email
+About Event
+
+​c0mpiled-San Fransokyo
+​（🇺🇸English Ver Below - This event will be held in English )
+
+​Your first step toward Y Combinator starts here.
+
+​本イベントは、「YCのテーマに沿い、４時間で開発するAIハッカソン」です。
+
+
+User Uploaded Image
+​日付: 2026年3月8日 (日)
+
+​会場: 虎ノ門ヒルズ 森タワー
+
+​主催: Transpose Platform
+
+​共催: 東大IPC（東京大学協創プラットフォーム開発株式会社）
+
+​協賛: 森ビル株式会社
+
+​時間: 9:00 - 19:00
+
+​言語: 英語 (English)
+
+​🏆 賞金（総額120万円以上＋特別特典）
+​🥇 1st Place: USD 5,000（日本円75万円＋）
+🥈 2nd Place: USD 2,000（日本円30万円＋）
+🥉 3rd Place: USD 1,000（日本円15万円＋）
+
+​🤝 特別特典: YCパートナー Office Hours 招待
+🎁 追加特典: TBD
+
+​さらに詳しい情報はこちら＞
+
+​Why this hackathon?
+
+User Uploaded Image
+​このハッカソンは、Y Combinator (以下YC)が「今、立ち上げてほしい」と公表している Request for Startups（RFS） - Spring 2026に取り組むことで、YCが求める思考法・基準を1日で体感するハッカソンです。
+
+​Organizers & Partners
+​Transpose Platformは、世界最高峰のアクセラレーターY Combinator（YC）へ投資する主要投資家（Significant Investor）として、日本の起業家・学生・若手研究者が「世界基準で戦える実力」を身につけられるようサポートしています。
+
+​共催の東大IPCは、東京大学が100%出資して設立された投資事業会社。アカデミア発スタートアップへの投資・事業化支援を主軸に、総額600億円に迫る複数ファンドを運用しています。さらに国内最大級のアカデミア横断型創業成長支援プログラム 「1stRound」 を展開し、22大学・5研究機関と連携。世界と伍するスタートアップ創出、エコシステム構築を通じて、世界における日本の産業競争力の強化に資するべく活動を展開しています。
+
+​さらに協賛には、日本を代表する都市開発デベロッパーであり、六本木ヒルズ、虎ノ門ヒルズ、麻布台ヒルズなどの大規模複合開発を手掛ける『森ビル』にご協力いただきます。
+
+​Transpose Platform・東大IPC・森ビルの3社布陣で臨むYC連携ハッカソン。ぜひご参加ください！
+
+​What you'll gain
+​YC的思考法の実践 — RFSを起点に、グローバル市場で勝てるプロダクトを考える
+
+​英語でのピッチ経験（ビデオ撮影）— YC面接を想定した実践的なアウトプット
+
+​グローバルチームでの開発 — 日本人・外国人混成チームでの協働
+
+​次のステップへの接続 — 優秀チームにはYCパートナーとのオフィスアワー機会を提供
+
+​Who should join?
+​YCへの応募を本気で考えている、または興味がある方
+
+​グローバル市場での起業・プロダクト開発に挑戦したい方
+
+​AIエンジニア、AI開発経験者
+
+​学生（主に大学院生）、社会人（エンジニア・起業準備中）、研究者
+
+​ビジネスレベルの英語でコミュニケーションできる方
+
+​個人参加も歓迎。
+
+​今回のテーマ：YC Request for Startups（RFS）Spring 2026
+​YCが「今、最も市場機会がある」と考えるスタートアップ領域を公開しているリストです。当日はここから1つ選び、チームでプロダクトを開発します。
+
+​詳細：https://www.ycombinator.com/rfs
+
+​Cursor for PM
+
+​AI-Native Hedge Fund
+
+​AI-Native Agency
+
+​Stablecoin Financial Services
+
+​AI for Government
+
+​Modern Metal Mills
+
+​AI Guidance for Physical Work
+
+​Judge by YC Alumni
+​Kai Brokering氏（VoiceOS / YC S25）
+
+User Uploaded Image
+​Henry Ndubuaku氏（Cactus YC S25）
+
+User Uploaded Image
+​Nojima Taishi氏（Canopi YC S21） - 現在はWeb3 やブロックチェーン関連のステルススタートアップ。
+
+User Uploaded Image
+​​Abhilash Chowdhary - (CrustData YC F24)
+
+User Uploaded Image
+​Vignesh Subbiah — Co-Founder & CTO of Unbound (YC S24)　(Remote)
+
+User Uploaded Image
+​Jia Shen - Shisa Ai
+
+User Uploaded Image
+​Duncan Ross — Co-Founder, soonami.io | 元CTO, Chelsea FC | 社外取締役, Nintendo
+
+User Uploaded Image
+​Schedule
+​10:00 – 10:30　受付
+10:30 – 12:30　チームビルディング
+12:30 – 13:00　開会挨拶
+13:00 – 17:00　開発タイム
+17:00 – 18:30　審査・評価
+18:30 – 18:45　結果発表・表彰式
+18:45 –　　　 ネットワーキング
+
+​Deliverables
+​RFSに基づく課題設定と解決アプローチ
+
+​プロダクト／技術／ビジネスモデルの概要
+
+​デモまたはピッチ動画（９０秒）
+
+​グローバル展開を前提とした視点
+
+​What to bring
+​ノートPC（開発環境は事前セットアップ推奨）
+
+​充電器
+
+​ポータブルWifi（もしあれば）
+
+​名刺（お持ちの方）
+
+​Important Notes
+​開発・発表はすべて英語で行います（開発したものをビデオ撮影していただき、審査員はその成果物を評価します）
+
+​遅刻・欠席の場合は事前にご連絡ください
+
+​チーム最大4名まで
+
+​プライバシーポリシー
+
+​Contact
+​​Transpose Platform - 日本市場担当
+Kyosuke Togami（戸上）
+kyosuke.togami@transposeplatform.vc
+
+​​Lineご連絡 →https://line.me/ti/p/ul1b9smm2R
+Whatsappでご連絡→https://wa.me/message/2SW3HPUHXPRTJ1
+Linkeidnでご連絡→https://www.linkedin.com/in/kyoske/
+
+​c0mpiled – San Fransokyo
+​YC | RFS - Spring 2026 | AI Hackathon
+
+​Your first step toward Y Combinator starts here.
+
+​Date: Sunday, March 8, 2026
+
+​Venue: Toranomon Hills - Mori Tower
+
+​Organizer: Transpose Platform
+
+​Co-organizer: UTokyo IPC (University of Tokyo Incubation Platform Development Co., Ltd.)
+
+​Sponsor: Mori Building Co., Ltd.
+
+​Time: 9:00 AM – 7:00 PM
+
+​Language: English
+
+​🏆Prize Money (Total ¥1.2 million or more + Benefits)
+​🥇1st Place: USD 5,000 (¥750,000+)
+🥈 2nd Place: USD 2,000 (¥300,000+)
+🥉 3rd Place: USD 1,000 (¥150,000+ )
+
+​🤝 Special Benefit: YC Partner Office Hours Invitation
+🎁 Additional Benefit: TBD
+
+​Why this hackathon?
+​This hackathon is designed to let you experience—in just one day—the mindset and standards Y Combinator looks for by tackling Request for Startups (RFS) themes that YC has publicly stated it wants founders to build right now.
+
+​Organizers & Partners
+​Transpose Platform is a Significant Investor in Y Combinator (YC), the world’s leading startup accelerator. We support Japanese entrepreneurs, students, and early-career researchers in developing the capabilities needed to compete at a global standard.
+
+​Our co-host, The University of Tokyo IPC, is a venture investment firm wholly owned by the University of Tokyo. Focused on investing in and supporting the commercialization of academia-originated startups, UTokyo IPC manages multiple funds totaling nearly JPY 60 billion. It also operates “1stRound,” one of Japan’s largest cross-academic startup growth programs, in collaboration with 22 universities and 5 research institutions. Through fostering globally competitive startups and building a robust ecosystem, UTokyo IPC is committed to strengthening Japan’s industrial competitiveness on the world stage.
+
+​We are also honored to have Mori Building, one of Japan’s leading urban developers—known for landmark large-scale mixed-use projects such as Roppongi Hills, Toranomon Hills, and Azabudai Hills—as a sponsor.
+
+​Join us for this YC-affiliated hackathon, powered by Transpose Platform, UTokyo IPC, and Mori Building. We look forward to your participation.
+
+​Outstanding teams will receive ongoing mentoring opportunities toward YC application.
+
+​What you’ll gain
+​YC-style thinking in practice
+Build products for global markets starting from YC’s RFS themes.
+
+​English pitch experience (video-recorded)
+Practical output modeled after YC interviews.
+
+​Global team collaboration
+Work in mixed teams of Japanese and international participants.
+
+​A clear next step
+Selected teams will be invited to office hours with YC partners.
+
+​Who should join?
+​Those seriously considering—or strongly interested in—applying to YC
+
+​Aspiring founders and builders targeting global markets
+
+​AI engineers and developers with AI experience
+
+​Students (primarily graduate students), working professionals (engineers, pre-founders), and researchers
+
+​Participants able to communicate in business-level English
+
+​Individual applications are welcome.
+
+​Theme: YC Request for Startups (RFS) Spring 2026
+​These are the startup categories YC believes represent the biggest market opportunities right now. Teams will select one category and build a product around it during the hackathon.
+
+​Full list: https://www.ycombinator.com/rfs
+
+​Cursor for PM
+
+​AI-Native Hedge Fund
+
+​AI-Native Agency
+
+​Stablecoin Financial Services
+
+​AI for Government
+
+​Modern Metal Mills
+
+​AI Guidance for Physical Work
+
+​Judge by YC Alumni
+​Kai Brokering氏（VoiceOS / YC S25）
+
+User Uploaded Image
+​Henry Ndubuaku氏（Cactus YC S25）
+
+User Uploaded Image
+​Nojima Taishi氏（Canopi YC S21）
+
+User Uploaded Image
+​​Abhilash Chowdhary - (CrustData YC F24)
+
+User Uploaded Image
+​Vignesh Subbiah — Co-Founder & CTO of Unbound (YC S24)(Remote)
+
+User Uploaded Image
+​Jia Shen - Shisa Ai
+
+User Uploaded Image
+​Duncan Ross — Co-Founder, soonami.io | 元CTO, Chelsea FC | 社外取締役, Nintendo
+
+User Uploaded Image
+​Schedule
+​10:00 – 10:30 Registration
+10:30 – 12:30 Team Building
+12:30 – 13:00 Opening Remarks
+13:00 – 17:00 Development Session
+17:00 – 18:30 Judging & Evaluation
+18:30 – 18:45 Results Announcement & Awards Ceremony
+18:45 – Networking
+
+​Deliverables
+​Problem definition and solution approach based on RFS
+
+​Overview of product, technology, and business model
+
+​Demo or pitch video (90 seconds)
+
+​A clear global-first perspective
+
+​What to bring
+​Laptop (development environment should be set up in advance)
+
+​Charger
+
+​(Portable Wifi, if you have)
+
+​Business cards (if available)
+
+​Important Notes
+​All development and presentations will be conducted entirely in English
+(You will submit a video of your work; judges will evaluate based on the recorded deliverables.)
+
+​Please inform us in advance if you will be late or absent.
+
+​Privacy Policy applies.
+
+​Contact
+​Transpose Platform – Japan Market
+Kyosuke Togami
+📧 kyosuke.togami@transposeplatform.vc
+
+​LINE: https://line.me/ti/p/ul1b9smm2R
+WhatsApp: https://wa.me/message/2SW3HPUHXPRTJ1
+LinkedIn: https://www.linkedin.com/in/kyoske/
+
+Blasts
+Kyosuke Togami
+Yesterday, 9:52 AM
+​Good morning everyone ☀️
+
+​The event is now just 2 days away, and we’re looking forward to seeing you all there.
+
+​We have received a large number of applications, and as a result, we have temporarily paused new approvals.
+
+​When cancellations occur, we continue approving participants, but at this time we have not been able to accommodate everyone.
+
+​We sincerely apologize for any inconvenience and appreciate your understanding.
+
+​As we prepare for the event, we have 2 requests.
+We will prepare as much as we can on our side, but your help would be greatly appreciated.
+
+​1. Bringing an extension cord
+It may be difficult for us to prepare enough extension cords for all 100+ participants.
+If you happen to have one, it would be very helpful if you could bring it with you.
+
+​2. Preparing portable Wi-Fi or tethering
+The venue Wi-Fi may become crowded.
+If possible, please consider bringing portable Wi-Fi or preparing a tethering connection.
+
+​We hope to make this a great event together with all of you, and we look forward to meeting everyone on the day.
+
+Kyosuke Togami
+Transpose Platform
+
+​皆さん、おはようございます！
+
+​いよいよイベントまであと2日となりました。
+当日、皆さんにお会いできることを楽しみにしています。
+
+​現在、大変多くの方からお申し込みをいただいており、
+一時的に新規の承認をストップしている状況です。
+
+​キャンセルが出た場合に順次承認を進めておりますが、
+現時点ではすべての方にお応えできていない状況となっております。
+
+​ご不便をおかけしてしまい恐縮ですが、何卒ご理解いただけますと幸いです。
+
+​また、当日に向けて2点だけお願いがあります。
+
+こちらでも可能な限り用意いたしますが
+
+​① 延長コードのご持参
+100名強の参加者全員分をご用意することが難しい状況です。
+もしお持ちの方がいらっしゃいましたら、ご持参いただけると大変助かります。
+
+​② ポータブルWi-Fi / テザリングのご準備
+会場のWi-Fiが混雑する可能性があります。
+可能な方は、ポータブルWi-Fiまたはテザリングのご準備をお願いいたします。
+
+​皆さんと一緒に、良いイベントを作れたら嬉しく思います。
+当日お会いできることを楽しみにしています。
+
+​どうぞよろしくお願いいたします。
+
+​Kyosuke Togami
+Transpose Platform
+
+Hiroki Matsuda
+Mar 4, 10:12 AM
+Input for Team Building Session
+​【日本語は下記】
+
+​🚨Important-
+
+​Hi everyone, this is Hiroki Matsuda from UTokyo IPC.
+
+​The event day is coming up soon, and I’m really looking forward to meeting all of you in person!
+
+​As we prepare for the event, I have one small request. Some of you may already have a team, while others may still be looking for teammates. To help make the team building session and the subsequent build time more effective, please fill out the following form in advance.
+
+​Deadline: March 7, 2026, 11:59 PM
+https://docs.google.com/forms/d/e/1FAIpQLSeugTze7mrtSKQxN28Y28BAyU3sRH5dliW5aVjnz0LxnHlmnw/viewform?usp=header
+
+​At Y Combinator, the quality and complementarity of the founding team are often considered even more important than the product itself. The presence of cofounders and the combination of skills are key evaluation factors. If possible, we also encourage forming teams with members who have international backgrounds to build stronger founding teams.
+
+​Your cooperation will help us make the team building process smoother and more productive. Thank you very much.
+
+​Hiroki Matsuda UTokyo IPC
+
+​皆さんこんにちは。東大IPCの松田です。
+
+​イベントの日が近づいてきましたね。当日皆さんにお会いできるのを楽しみにしています！
+
+​本番に向けて一つお願いがあります。すでにチームがある方、メンバーを探している方など様々だと思いますが、チームビルディングおよびその後の開発時間をより効果的に進めるため、事前に以下のフォームへの入力をお願いします。
+
+​回答期限：2026年3月7日 23:59
+https://docs.google.com/forms/d/e/1FAIpQLSeugTze7mrtSKQxN28Y28BAyU3sRH5dliW5aVjnz0LxnHlmnw/viewform?usp=header
+
+​Y Combinatorでは、プロダクト以上に創業チームの質と補完性が重視されます。共同創業者の存在やスキルの組み合わせは重要な評価要素とされています。可能であれば国際的なバックグラウンドを持つメンバーとの組成も視野に入れ、より強いチームづくりを推奨しています。
+
+​チームビルディングをより有意義なものにするため、ご協力いただけると幸いです。
+
+​東大IPC　松田 弘貴
+
+Kyosuke Togami
+Mar 4, 9:16 AM
+​【日本語は下記👇】
+We're thrilled to announce 3 additional judges joining c0mpiled!
+
+​Vignesh Subbiah — Co-Founder & CTO, Unbound (YC S24)
+
+​After building systems processing billions of ad requests at Adobe, Vignesh joined two YC-backed startups as a Founding Engineer. His latest company, Unbound, blocked over 7,000 data leaks and cut AI tooling costs by ~70% within months of launch. YC S24 alumni.
+
+​Jia Shen — Co-Founder & CEO, Shisa.ai
+
+​Co-founded RockYou, reaching 400M+ users and raising over $140M. Now based in Tokyo, his three-person team built Shisa V2-405B — a 405B-parameter Japanese LLM that hit 1 million downloads on Hugging Face within one month of launch.
+
+​Duncan Ross — Co-Founder, soonami.io | ex-CTO, Chelsea FC | Non-Executive Board Member (Technology), Nintendo
+
+​PhD in Aerospace Engineering & Cryptography. As CTO of Chelsea FC, led Chelsea Digital Ventures across stadium, broadcasting, and fitness tech R&D — launching Blue Fuel (sports nutrition), Perfect Play (football coaching), and NFT initiatives. Now serves as Non-Executive Board Member (Technology) at Nintendo while co-founding soonami.io, an AI × Web3 venture-building accelerator.
+
+ーーーーーーーー
+
+ニンテンドーの社外取締役・Duncan Rossと、YC出身AIセキュリティ企業UnboundのCTO・Vignesh Subbiah、そして4億人が使い、調達総額$140M超のRockYouを共同創業し、今は日本語LLM開発に取り組むJia Shen、この3名が追加で審査員として参加することになりました！
+
+​Vignesh Subbiah — Co-Founder & CTO, Unbound（YC S24）
+
+​Adobeで数十億件の広告処理システムを構築した後、2社のYC企業でFounding Engineerを経験。共同創業したUnboundは、リリース数ヶ月で顧客の情報漏洩を7,000件以上防ぎ、AIコストを約70%削減。YC S24卒業生。
+
+​Jia Shen — Co-Founder & CEO, Shisa.ai
+
+​RockYouを共同創業し、ユーザー4億人超・調達総額$140M超を達成。現在は東京を拠点に、3人のチームで4,050億パラメータの日本語LLM「Shisa V2-405B」を開発。リリース1ヶ月でHugging Faceダウンロード100万件を突破。
+
+​Duncan Ross — Co-Founder, soonami.io | 元CTO, Chelsea FC | 社外取締役, Nintendo
+
+​航空宇宙工学×暗号学のPhD取得者。Chelsea FCのCTOとしてChelsea Digital Venturesを率い、スタジアム・放送・フィットネス技術のR&Dを主導。Blue Fuel（スポーツ栄養）、Perfect Play（サッカーコーチング）、NFTイニシアチブ等を展開。現在はNintendoの社外取締役（テクノロジー）を務めながら、AI×Web3のベンチャービルディング・アクセラレーター「soonami.io」を共同創業。
+
+Kyosuke Togami
+Mar 1, 4:37 PM
+​【日本語は下記】
+
+​🚨Important-
+
+​Hi everyone,
+
+​The event day is almost here, we’re really looking forward to seeing you all soon!
+
+​As we head into the final stretch, we have 2 quick requests to help ensure a smooth experience for everyone:
+
+​1️⃣ Portable Wi-Fi / Tethering
+
+​We will have Wi-Fi available at the venue. However, with 100+ participants fully leveraging AI throughout the hackathon, a single network may face bandwidth limitations. We especially expect congestion around 4:00 PM when all teams submit their projects at once.
+
+​We want to avoid a situation where a team is difficult to submit the product they worked so hard on. If possible, we would greatly appreciate it if you could bring a portable Wi-Fi device or be prepared to use your phone’s tethering as a backup.
+
+​2️⃣ Extension Cords / Power Strips
+
+​Due to the layout of the venue, some seats are located farther from power outlets. In certain areas, charging may require moving closer to the walls.
+
+​We will prepare several extension cords, but they may not be sufficient for everyone. If you are able to bring an extension cord (ideally 3–5 meters) or a power strip, it would be extremely helpful.
+
+​We are doing everything we can to ensure a smooth and stable development environment, but your cooperation will make a big difference in keeping things running seamlessly on the day.
+
+​Thank you very much in advance for your support , and we can’t wait to build something great together.
+
+​Kyosuke Togami Transpose Platform
+
+​皆さん イベントの日が近づいてきましたね！当日皆さんにお会いできるのを楽しみにしています！
+
+​本番に向けて、二つお願いがあります。
+
+​1️⃣ポータブルWi-Fi・テザリングについて 会場にはWi-Fiを用意していますが、100名全員がAIをフル活用するハッカソンとなると、一本の回線では帯域が厳しくなる可能性があります。特に全チームが一斉にサブミッションを送る16:00前後は混雑が予想されます。せっかく作ったプロダクトを提出できない、という事態だけは避けたいので、ポータブルWi-Fiやスマホのテザリングをバックアップとして持参いただけると非常に助かります。
+
+​2️⃣延長コード・電源タップについて 会場の構造上、コンセントから距離のある席もあり、場所によっては壁側に寄らないと充電が難しくなる可能性があります。
+
+​私たちも延長コードをいくつか用意しますが、十分に行き渡らない可能性があります。可能な方はぜひ延長コードをご持参いただけると大変ありがたいです。
+
+​ご協力のほど、よろしくお願いいたします。
+
+​それでは皆さんにお会いできるのを楽しみにしています✨
+
+​Kyosuke Togami Transpose Platform
+
+Kyosuke Togami
+Feb 27, 2:27 PM
+​【日本語は下記👇】
+After a longer-than-expected coordination process, we’re excited to officially confirm our 4 judges: 2 joining from Japan and 2 traveling from Silicon Valley.
+
+​It’s an outstanding lineup & every judge is a YC founder🫡
+
+​From Japan:
+
+
+User Uploaded Image
+​Kai Brokering (VoiceOS / YC X25) — Originally from Tokyo, Kai moved to the U.S. in 2015 and has spent over seven years working on voice AI. This February, he officially launched VoiceOS through YC. VoiceOS is a next-generation voice operating system that understands the intent behind spoken language and transforms it into refined, structured text.
+
+
+User Uploaded Image
+​Taishi Nojima (Canopi / YC S21) — A Yale University Computer Science graduate, Taishi published research at a top IEEE conference while still a student. After working as a security engineer at Facebook, he founded Canopi and was accepted into YC S21. He was also a founding engineer at Blur.io, one of the world’s largest NFT marketplaces by trading volume. He is currently building a new global blockchain startup in stealth mode.
+
+​From Silicon Valley:
+
+
+User Uploaded Image
+​Henry Ndubuaku (Cactus / YC S25) — Entered university at 15 and earned a master’s degree in AI. Known for his open-source LLM reimplementation framework and CUDA tutorials, he has received offers from NVIDIA. He is now building Cactus, a low-latency inference engine that runs LLMs efficiently on smartphones and wearables. Backed by YC, Oxford Seed Fund, and Google for Startups.
+
+
+User Uploaded Image
+​Abhilash Chowdhary (CrustData / YC F24) — Previously built the platform for autonomous delivery robots at Uber Postmates. He now leads CrustData, a real-time web data API for AI agents. The company reached $4M ARR within seven months after YC. YC’s Garry Tan called it “one of the strongest companies in the F24 batch,” and YC itself is a customer.
+
+​In addition, while not yet finalized, there is a possibility that another YC founder based in Silicon Valley may join remotely as a judge. We will share further updates as soon as this is confirmed.
+
+​On the day of the event, Judge Kai Brokering (VoiceOS) will also be making a special announcement for participants. Please stay tuned！
+
+​We look forward to seeing all of you at the event.
+
+​Best regards,
+Kyosuke Togami
+
+​ーーーーーー
+調整がかなり長引いていましたが、日本から2名、シリコンバレーから来日する2名の審査員4名が正式に確定しました！
+
+​今回も素晴らしいラインアップ＆全員YC出身の創業者です。（以下簡単な紹介文）
+
+​まず日本からは2名。
+
+​- Kai Brokering（VoiceOS / YC X25）— 東京出身、2015年に渡米。7年以上音声AIに取り組み、今年2月にVoiceOSをYC経由で正式ローンチ。話した言葉の意図を理解して、洗練された文章に変換する次世代の音声OS。
+
+​- 野島大嗣（Canopi / YC S21）— Yale大学コンピュータサイエンス卒。在学中にIEEEトップカンファレンスで論文を発表。Facebookでセキュリティエンジニアを経た後、Canopiを創業しY Combinator S21に採択。NFTマーケットプレイス Blur.io では創業メンバーとして開発に携わり、取引高ベースで世界最大規模のプラットフォームへと成長させた。現在は、グローバル向けの新しいブロックチェーンスタートアップをステルスで開発中。
+
+​そして、シリコンバレーから2名が来日します。
+
+​- Henry Ndubuaku（Cactus / YC S25）— 15歳で大学入学、AI修士号取得。オープンソースのLLM再実装フレームワークやCUDAチュートリアルで知られ、NVIDIAからもオファーを受けた。今はスマホやウェアラブル上でLLMを低遅延で動かす推論エンジンCactusを開発中。YC、Oxford Seed Fund、Google for Startups支援。
+
+​- Abhilash Chowdhary（CrustData YC F24）— 元UberPostmatesで自律配送ロボットのプラットフォームを構築。AIエージェント向けリアルタイムWebデータAPIのCrustDataを率いて、YC卒業後7ヶ月でARR $4M達成。YCのGarry Tan自身が「F24バッチ最強の企業の一つ」と言い、YC自体も顧客として利用！
+
+​まだ確定ではありませんが、シリコンバレー現地からもリモートでYCファウンダーが審査員として参加するかもしれません。こちらに関してはまたアップデートします
+
+​また、イベント当日には審査員のKai Brokering氏（VoiceOS）より、参加者の皆さんへ特別な発表があるとのことです。ぜひ楽しみにしていてください！
+
+​それでは当日皆さんにお会いできるのを楽しみにしています！
+
+Kyosuke Togami
+
+Kyosuke Togami
+Feb 26, 3:10 PM
+​皆さん、『Transpose × 東京大学IPC × 森ビル』3社布陣で臨むYC連携ハッカソンまであと11日です⚡️
+
+東京大学IPCのご支援のおかげで、東大をはじめとするアカデミアネットワーク × CS領域の方々の参加も着実に広がってきています。
+
+​現時点で130名の応募をいただき、あと約70名ほどご参加いただけます。
+
+もしご関心をお持ちいただけそうなご友人・お知り合いがいらっしゃいましたら、ぜひ本イベントをご紹介いただけますと嬉しいです🙇‍♂️
+
+​YCの審査員も順次固まりつつあります。
+詳細は明日以降、改めてご紹介いたします。
+
+​当日、皆さんにお会いできることを楽しみにしております。
+
+Kyosuke Togami
+
+​We are now 11 days away from the AI hackathon hosted by Transpose Platform × Tokyo IPC × Mori Building ⚡️
+
+​Thanks to the strong support of UTokyo IPC, participation from the UTokyo academic network and the broader CS community has been steadily expanding.
+
+​We have received 130 applications to date, and we can accommodate approximately 70 more participants.
+
+​If you know friends or colleagues who may be interested, I would greatly appreciate it if you could share this event with them 🙇‍♂️
+
+​The YC judges are also coming together, and I will introduce them in more detail starting tomorrow.
+
+​I’m very much looking forward to seeing you all at the event.
+
+​Best regards,
+Kyosuke Togami
+
+Location
+虎ノ門ヒルズ森タワー
+Japan, 〒105-0001 Tokyo, Minato City, Toranomon, 1-chōme−23 虎ノ門ヒルズ森タワー
+
+DiscoverPricingHelp
+Host your event with Luma ↗
+
+
+
+11
