@@ -1,65 +1,207 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import {
+  Heart,
+  Thermometer,
+  Wind,
+  Activity,
+  ChevronRight,
+  Stethoscope,
+  Zap,
+} from "lucide-react";
+import CameraView from "@/components/CameraView";
+import VitalCard from "@/components/VitalCard";
+import { Card, CardContent, CardHeader } from "@/components/ui/Card";
+import { Badge } from "@/components/ui/Badge";
+
+const vitals = [
+  {
+    icon: Heart,
+    label: "Heart Rate",
+    value: "72",
+    unit: "bpm",
+    status: "normal" as const,
+    trend: "stable" as const,
+  },
+  {
+    icon: Wind,
+    label: "SpO₂",
+    value: "98",
+    unit: "%",
+    status: "normal" as const,
+    trend: "stable" as const,
+  },
+  {
+    icon: Thermometer,
+    label: "Temperature",
+    value: "37.1",
+    unit: "°C",
+    status: "normal" as const,
+    trend: "stable" as const,
+  },
+  {
+    icon: Activity,
+    label: "Blood Pressure",
+    value: "118/78",
+    unit: "mmHg",
+    status: "normal" as const,
+    trend: "up" as const,
+  },
+];
+
+const recentSessions = [
+  {
+    id: 1,
+    title: "Cardio Check",
+    time: "Today, 9:00 AM",
+    duration: "12 min",
+    score: 94,
+  },
+  {
+    id: 2,
+    title: "Breathing Assessment",
+    time: "Yesterday, 3:30 PM",
+    duration: "8 min",
+    score: 87,
+  },
+];
 
 export default function Home() {
+  const [sessionActive, setSessionActive] = useState(false);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="flex flex-col gap-4 px-4 pt-4">
+      {/* Live Coaching Section */}
+      <section>
+        <div className="flex items-center justify-between mb-3">
+          <div>
+            <h2 className="font-semibold text-slate-900 text-base leading-none">
+              Live Coaching
+            </h2>
+            <p className="text-xs text-slate-500 mt-0.5">
+              AI-powered real-time analysis
+            </p>
+          </div>
+          {sessionActive && (
+            <Badge variant="success">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              Session Active
+            </Badge>
+          )}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Camera — primary hero element */}
+        <div className="relative w-full aspect-[3/4] sm:aspect-video rounded-2xl overflow-hidden shadow-lg">
+          <CameraView onStatusChange={setSessionActive} />
+
+          {/* AI overlay when active */}
+          {sessionActive && (
+            <div className="absolute bottom-16 left-4 right-4 pointer-events-none">
+              <div className="bg-black/60 backdrop-blur-sm rounded-xl p-3">
+                <div className="flex items-start gap-2">
+                  <div className="w-6 h-6 rounded-full bg-sky-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Zap className="w-3 h-3 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-white text-xs font-medium">
+                      AI Observation
+                    </p>
+                    <p className="text-slate-300 text-[11px] mt-0.5 leading-relaxed">
+                      Posture looks good. Breathing appears normal. Maintain
+                      current position for best readings.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-      </main>
+      </section>
+
+      {/* Vitals Grid */}
+      <section>
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="font-semibold text-slate-900 text-base">
+            Current Vitals
+          </h2>
+          <button className="text-xs text-sky-600 font-medium flex items-center gap-0.5">
+            View all <ChevronRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          {vitals.map((vital) => (
+            <VitalCard key={vital.label} {...vital} />
+          ))}
+        </div>
+      </section>
+
+      {/* Recent Sessions */}
+      <section>
+        <div className="flex items-center justify-between mb-3">
+          <h2 className="font-semibold text-slate-900 text-base">
+            Recent Sessions
+          </h2>
+          <button className="text-xs text-sky-600 font-medium flex items-center gap-0.5">
+            History <ChevronRight className="w-3.5 h-3.5" />
+          </button>
+        </div>
+        <div className="flex flex-col gap-2">
+          {recentSessions.map((session) => (
+            <Card key={session.id}>
+              <CardContent className="pt-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-sky-50 flex items-center justify-center flex-shrink-0">
+                    <Stethoscope className="w-5 h-5 text-sky-500" strokeWidth={1.8} />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-slate-900 truncate">
+                      {session.title}
+                    </p>
+                    <p className="text-xs text-slate-400">
+                      {session.time} · {session.duration}
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-end gap-1">
+                    <span className="text-lg font-bold text-slate-900 tabular-nums">
+                      {session.score}
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-medium">
+                      SCORE
+                    </span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* Quick Actions */}
+      <section className="pb-2">
+        <h2 className="font-semibold text-slate-900 text-base mb-3">
+          Quick Actions
+        </h2>
+        <Card>
+          <CardHeader>
+            <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">
+              Start a check-up
+            </p>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-3 gap-2">
+              {["Cardio", "Respiratory", "Posture"].map((action) => (
+                <button
+                  key={action}
+                  className="py-2.5 px-2 rounded-xl bg-slate-50 hover:bg-sky-50 hover:text-sky-700 text-slate-600 text-xs font-medium transition-colors border border-slate-100 hover:border-sky-100"
+                >
+                  {action}
+                </button>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </section>
     </div>
   );
 }
