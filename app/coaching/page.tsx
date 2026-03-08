@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { FileVideo, ScanSearch, AlignLeft } from "lucide-react";
-import VideoUpload from "@/components/VideoUpload";
-import FrameExtractor from "@/components/FrameExtractor";
-import AnalysisResult from "@/components/AnalysisResult";
+import VideoUpload from "@/components/coaching/VideoUpload";
+import FrameExtractor from "@/components/coaching/FrameExtractor";
+import AnalysisResult from "@/components/coaching/AnalysisResult";
 import { type ExtractedFrame } from "@/lib/extractFrames";
 
 const STEPS = [
@@ -20,11 +20,10 @@ export default function CoachingPage() {
 
   return (
     <div className="flex flex-col gap-5 px-4 pt-4 pb-6">
-      {/* ページタイトル */}
       <div>
         <h1 className="text-xl font-bold text-slate-900">介助動作 コーチング</h1>
         <p className="text-sm text-slate-500 mt-0.5">
-          悪い例の動画からAIが改善点をフィードバックします
+          動画をアップロードしてAIが改善点をフィードバックします
         </p>
       </div>
 
@@ -68,7 +67,6 @@ export default function CoachingPage() {
         })}
       </div>
 
-      {/* Step 1: 動画アップロード */}
       {currentStep === 1 && (
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
@@ -84,7 +82,6 @@ export default function CoachingPage() {
         </div>
       )}
 
-      {/* Step 2: フレーム抽出 */}
       {currentStep === 2 && videoUrl && (
         <FrameExtractor
           videoUrl={videoUrl}
@@ -95,7 +92,6 @@ export default function CoachingPage() {
         />
       )}
 
-      {/* Step 3: AI分析 */}
       {currentStep === 3 && frames.length > 0 && (
         <AnalysisResult
           frames={frames}

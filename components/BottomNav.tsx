@@ -1,16 +1,14 @@
 "use client";
 
-import { Home, Activity, Stethoscope, MessageCircle, User } from "lucide-react";
+import { Home, Stethoscope, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { icon: Home,        label: "ホーム",    href: "/" },
-  { icon: Activity,   label: "バイタル",  href: "/vitals" },
-  { icon: Stethoscope,label: "コーチング",href: "/coaching" },
-  { icon: MessageCircle, label: "チャット", href: "/chat" },
-  { icon: User,       label: "プロフィール", href: "/profile" },
+  { icon: Home,         label: "ホーム",      href: "/" },
+  { icon: Stethoscope,  label: "コーチング",  href: "/coaching" },
+  { icon: Settings,     label: "設定",        href: "/settings" },
 ];
 
 export default function BottomNav() {

@@ -1,207 +1,148 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback, useRef } from "react";
+import { type PoseAngles } from "@/lib/pose/angle-calculator";
 import {
-  Heart,
-  Thermometer,
-  Wind,
-  Activity,
-  ChevronRight,
-  Stethoscope,
-  Zap,
-} from "lucide-react";
-import CameraView from "@/components/CameraView";
-import VitalCard from "@/components/VitalCard";
-import { Card, CardContent, CardHeader } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
+  WARN_ANGLE,
+  DANGER_ANGLE,
+  CONSECUTIVE_FRAMES_THRESHOLD,
+  LLM_COOLDOWN,
+} from "@/lib/pose/constants";
+import {
+  parsePostureResponse,
+  type PostureAnalysisResult,
+} from "@/lib/prompts/realtime-posture";
+import { useApiKey } from "@/lib/api-key-context";
+import PoseCamera from "@/components/home/PoseCamera";
+import PoseHUD from "@/components/home/PoseHUD";
+import ResultSheet from "@/components/home/ResultSheet";
 
-const vitals = [
-  {
-    icon: Heart,
-    label: "Heart Rate",
-    value: "72",
-    unit: "bpm",
-    status: "normal" as const,
-    trend: "stable" as const,
-  },
-  {
-    icon: Wind,
-    label: "SpO₂",
-    value: "98",
-    unit: "%",
-    status: "normal" as const,
-    trend: "stable" as const,
-  },
-  {
-    icon: Thermometer,
-    label: "Temperature",
-    value: "37.1",
-    unit: "°C",
-    status: "normal" as const,
-    trend: "stable" as const,
-  },
-  {
-    icon: Activity,
-    label: "Blood Pressure",
-    value: "118/78",
-    unit: "mmHg",
-    status: "normal" as const,
-    trend: "up" as const,
-  },
-];
+export default function HomePage() {
+  const { apiKey, isKeySet } = useApiKey();
+  const [angles, setAngles] = useState<PoseAngles>({ trunk: null, neck: null });
+  const [cameraActive, setCameraActive] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [captureRequested, setCaptureRequested] = useState(false);
+  const [result, setResult] = useState<PostureAnalysisResult | null>(null);
+  const [sheetOpen, setSheetOpen] = useState(false);
 
-const recentSessions = [
-  {
-    id: 1,
-    title: "Cardio Check",
-    time: "Today, 9:00 AM",
-    duration: "12 min",
-    score: 94,
-  },
-  {
-    id: 2,
-    title: "Breathing Assessment",
-    time: "Yesterday, 3:30 PM",
-    duration: "8 min",
-    score: 87,
-  },
-];
+  // 連続フレーム数（ref で管理して再レンダリングを抑える）
+  const consecutiveRef = useRef(0);
+  const lastLLMTimeRef = useRef(0);
+  const [consecutiveDisplay, setConsecutiveDisplay] = useState(0);
 
-export default function Home() {
-  const [sessionActive, setSessionActive] = useState(false);
+  // 角度更新 + 自動トリガー判定
+  const handleAnglesUpdate = useCallback(
+    (newAngles: PoseAngles) => {
+      setAngles(newAngles);
+
+      if (newAngles.trunk === null) {
+        consecutiveRef.current = 0;
+        setConsecutiveDisplay(0);
+        return;
+      }
+
+      // 連続フレームカウント
+      if (newAngles.trunk >= DANGER_ANGLE) {
+        consecutiveRef.current++;
+      } else if (newAngles.trunk < WARN_ANGLE) {
+        consecutiveRef.current = Math.max(0, consecutiveRef.current - 1);
+      }
+      // WARN_ANGLE <= trunk < DANGER_ANGLE → 凍結
+
+      setConsecutiveDisplay(consecutiveRef.current);
+
+      // 自動トリガー
+      if (
+        consecutiveRef.current >= CONSECUTIVE_FRAMES_THRESHOLD &&
+        Date.now() - lastLLMTimeRef.current >= LLM_COOLDOWN &&
+        !isAnalyzing &&
+        isKeySet
+      ) {
+        triggerAnalysis();
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [isAnalyzing, isKeySet]
+  );
+
+  // 分析トリガー
+  const triggerAnalysis = useCallback(() => {
+    if (isAnalyzing || !isKeySet) return;
+    setIsAnalyzing(true);
+    lastLLMTimeRef.current = Date.now();
+    consecutiveRef.current = 0;
+    setConsecutiveDisplay(0);
+    setCaptureRequested(true);
+  }, [isAnalyzing, isKeySet]);
+
+  // キャプチャ完了 → API呼び出し
+  const handleCaptured = useCallback(
+    async (base64: string) => {
+      setCaptureRequested(false);
+
+      try {
+        const res = await fetch("/api/realtime-analyze", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            frame: base64,
+            trunkAngle: angles.trunk,
+            neckAngle: angles.neck,
+            apiKey,
+          }),
+        });
+
+        if (!res.ok) throw new Error(await res.text());
+
+        const text = await res.text();
+        const parsed = parsePostureResponse(text);
+        setResult(parsed);
+        setSheetOpen(true);
+      } catch (e) {
+        console.error("分析エラー:", e);
+      } finally {
+        setIsAnalyzing(false);
+      }
+    },
+    [angles, apiKey]
+  );
 
   return (
-    <div className="flex flex-col gap-4 px-4 pt-4">
-      {/* Live Coaching Section */}
-      <section>
-        <div className="flex items-center justify-between mb-3">
-          <div>
-            <h2 className="font-semibold text-slate-900 text-base leading-none">
-              Live Coaching
-            </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
-              AI-powered real-time analysis
-            </p>
-          </div>
-          {sessionActive && (
-            <Badge variant="success">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Session Active
-            </Badge>
-          )}
+    <div className="relative w-full h-[calc(100dvh-3.5rem-4rem)] bg-slate-900 rounded-2xl overflow-hidden mx-auto max-w-lg">
+      {/* APIキー未設定の警告 */}
+      {!isKeySet && cameraActive && (
+        <div className="absolute top-12 left-4 right-4 z-30 bg-amber-500/90 backdrop-blur-sm text-white text-xs font-medium px-3 py-2 rounded-lg text-center">
+          設定画面でAPIキーを入力すると分析機能が使えます
         </div>
+      )}
 
-        {/* Camera — primary hero element */}
-        <div className="relative w-full aspect-[3/4] sm:aspect-video rounded-2xl overflow-hidden shadow-lg">
-          <CameraView onStatusChange={setSessionActive} />
+      {/* カメラ + MediaPipe */}
+      <PoseCamera
+        onAnglesUpdate={handleAnglesUpdate}
+        onStatusChange={setCameraActive}
+        captureRequested={captureRequested}
+        onCaptured={handleCaptured}
+      />
 
-          {/* AI overlay when active */}
-          {sessionActive && (
-            <div className="absolute bottom-16 left-4 right-4 pointer-events-none">
-              <div className="bg-black/60 backdrop-blur-sm rounded-xl p-3">
-                <div className="flex items-start gap-2">
-                  <div className="w-6 h-6 rounded-full bg-sky-500 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Zap className="w-3 h-3 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-white text-xs font-medium">
-                      AI Observation
-                    </p>
-                    <p className="text-slate-300 text-[11px] mt-0.5 leading-relaxed">
-                      Posture looks good. Breathing appears normal. Maintain
-                      current position for best readings.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
+      {/* HUD オーバーレイ */}
+      {cameraActive && (
+        <PoseHUD
+          angles={angles}
+          consecutiveFrames={consecutiveDisplay}
+          isAnalyzing={isAnalyzing}
+          onManualAnalyze={triggerAnalysis}
+        />
+      )}
 
-      {/* Vitals Grid */}
-      <section>
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="font-semibold text-slate-900 text-base">
-            Current Vitals
-          </h2>
-          <button className="text-xs text-sky-600 font-medium flex items-center gap-0.5">
-            View all <ChevronRight className="w-3.5 h-3.5" />
-          </button>
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          {vitals.map((vital) => (
-            <VitalCard key={vital.label} {...vital} />
-          ))}
-        </div>
-      </section>
-
-      {/* Recent Sessions */}
-      <section>
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="font-semibold text-slate-900 text-base">
-            Recent Sessions
-          </h2>
-          <button className="text-xs text-sky-600 font-medium flex items-center gap-0.5">
-            History <ChevronRight className="w-3.5 h-3.5" />
-          </button>
-        </div>
-        <div className="flex flex-col gap-2">
-          {recentSessions.map((session) => (
-            <Card key={session.id}>
-              <CardContent className="pt-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-sky-50 flex items-center justify-center flex-shrink-0">
-                    <Stethoscope className="w-5 h-5 text-sky-500" strokeWidth={1.8} />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-semibold text-slate-900 truncate">
-                      {session.title}
-                    </p>
-                    <p className="text-xs text-slate-400">
-                      {session.time} · {session.duration}
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-end gap-1">
-                    <span className="text-lg font-bold text-slate-900 tabular-nums">
-                      {session.score}
-                    </span>
-                    <span className="text-[10px] text-slate-400 font-medium">
-                      SCORE
-                    </span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* Quick Actions */}
-      <section className="pb-2">
-        <h2 className="font-semibold text-slate-900 text-base mb-3">
-          Quick Actions
-        </h2>
-        <Card>
-          <CardHeader>
-            <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">
-              Start a check-up
-            </p>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-3 gap-2">
-              {["Cardio", "Respiratory", "Posture"].map((action) => (
-                <button
-                  key={action}
-                  className="py-2.5 px-2 rounded-xl bg-slate-50 hover:bg-sky-50 hover:text-sky-700 text-slate-600 text-xs font-medium transition-colors border border-slate-100 hover:border-sky-100"
-                >
-                  {action}
-                </button>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </section>
+      {/* 結果ボトムシート */}
+      <ResultSheet
+        result={result}
+        trunkAngle={angles.trunk}
+        neckAngle={angles.neck}
+        open={sheetOpen}
+        onClose={() => setSheetOpen(false)}
+      />
     </div>
   );
 }

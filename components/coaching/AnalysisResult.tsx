@@ -3,7 +3,8 @@
 import { useState, useCallback } from "react";
 import { Loader2, AlertCircle, Sparkles, ListChecks } from "lucide-react";
 import { type ExtractedFrame, dataUrlToBase64 } from "@/lib/extractFrames";
-import { Card, CardContent } from "./ui/Card";
+import { Card, CardContent } from "@/components/ui/Card";
+import { useApiKey } from "@/lib/api-key-context";
 
 interface AnalysisResultProps {
   frames: ExtractedFrame[];
@@ -19,7 +20,7 @@ interface CategoryScore {
 interface ParsedAnalysis {
   totalScore: number | null;
   categories: CategoryScore[];
-  summary: string[];       // 要点まとめ
+  summary: string[];
   problems: string[];
   solutions: string[];
   review: string;
@@ -42,20 +43,17 @@ function parseAnalysis(raw: string): ParsedAnalysis {
     const trimmed = line.trim();
     if (!trimmed) continue;
 
-    // セクション検出
     if (trimmed.startsWith("## ")) {
       section = trimmed.replace("## ", "");
       continue;
     }
 
-    // 総合スコア
     if (section === "総合スコア") {
       const m = trimmed.match(/SCORE:(\d+)/);
       if (m) result.totalScore = parseInt(m[1]);
       continue;
     }
 
-    // カテゴリ別評価
     if (section === "カテゴリ別評価") {
       const m = trimmed.match(/CATEGORY:(.+):(\d+):(高|中|低)/);
       if (m) {
@@ -68,28 +66,24 @@ function parseAnalysis(raw: string): ParsedAnalysis {
       continue;
     }
 
-    // 要点まとめ
     if (section === "要点まとめ") {
-      const text = trimmed.replace(/^[-・・\d.]\s*/, "").trim();
+      const text = trimmed.replace(/^[-・\d.]\s*/, "").trim();
       if (text) result.summary.push(text);
       continue;
     }
 
-    // 問題点
     if (section === "問題点") {
-      const text = trimmed.replace(/^[-・・\d.]\s*/, "").trim();
+      const text = trimmed.replace(/^[-・\d.]\s*/, "").trim();
       if (text) result.problems.push(text);
       continue;
     }
 
-    // 改善方法
     if (section === "改善方法") {
-      const text = trimmed.replace(/^[-・・\d.]\s*/, "").trim();
+      const text = trimmed.replace(/^[-・\d.]\s*/, "").trim();
       if (text) result.solutions.push(text);
       continue;
     }
 
-    // 総評
     if (section === "総評") {
       result.review += (result.review ? " " : "") + trimmed;
       continue;
@@ -135,6 +129,7 @@ function ScoreRing({ score }: { score: number }) {
 }
 
 export default function AnalysisResult({ frames, onAnalysisDone }: AnalysisResultProps) {
+  const { apiKey } = useApiKey();
   const [status, setStatus] = useState<"idle" | "loading" | "done" | "error">("idle");
   const [rawText, setRawText] = useState("");
   const [parsed, setParsed] = useState<ParsedAnalysis | null>(null);
@@ -152,7 +147,7 @@ export default function AnalysisResult({ frames, onAnalysisDone }: AnalysisResul
       const res = await fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ frames: base64Frames }),
+        body: JSON.stringify({ frames: base64Frames, apiKey }),
       });
 
       if (!res.ok) throw new Error(await res.text());
@@ -177,7 +172,7 @@ export default function AnalysisResult({ frames, onAnalysisDone }: AnalysisResul
       setErrorMsg("分析に失敗しました。もう一度お試しください。");
       setStatus("error");
     }
-  }, [frames, onAnalysisDone]);
+  }, [frames, onAnalysisDone, apiKey]);
 
   return (
     <div className="flex flex-col gap-4">
@@ -188,7 +183,6 @@ export default function AnalysisResult({ frames, onAnalysisDone }: AnalysisResul
         <h2 className="font-semibold text-slate-800">AI分析</h2>
       </div>
 
-      {/* 分析開始ボタン */}
       {status === "idle" && (
         <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100 flex flex-col gap-3">
           <p className="text-sm text-slate-600">
@@ -205,7 +199,6 @@ export default function AnalysisResult({ frames, onAnalysisDone }: AnalysisResul
         </div>
       )}
 
-      {/* ローディング（ストリーミング前） */}
       {status === "loading" && !rawText && (
         <div className="flex flex-col items-center gap-3 py-10">
           <Loader2 className="w-8 h-8 text-sky-500 animate-spin" />
@@ -213,7 +206,6 @@ export default function AnalysisResult({ frames, onAnalysisDone }: AnalysisResul
         </div>
       )}
 
-      {/* ストリーミング中：生テキスト表示 */}
       {status === "loading" && rawText && (
         <Card>
           <CardContent className="pt-4">
@@ -228,11 +220,8 @@ export default function AnalysisResult({ frames, onAnalysisDone }: AnalysisResul
         </Card>
       )}
 
-      {/* 分析完了：構造化表示 */}
       {status === "done" && parsed && (
         <div className="flex flex-col gap-4">
-
-          {/* ① 総合スコア */}
           {parsed.totalScore !== null && (
             <Card>
               <CardContent className="pt-4">
@@ -256,7 +245,6 @@ export default function AnalysisResult({ frames, onAnalysisDone }: AnalysisResul
             </Card>
           )}
 
-          {/* ② カテゴリ別評価 */}
           {parsed.categories.length > 0 && (
             <Card>
               <CardContent className="pt-4">
@@ -291,7 +279,6 @@ export default function AnalysisResult({ frames, onAnalysisDone }: AnalysisResul
             </Card>
           )}
 
-          {/* ③ 要点まとめ */}
           {parsed.summary.length > 0 && (
             <Card>
               <CardContent className="pt-4">
@@ -312,7 +299,6 @@ export default function AnalysisResult({ frames, onAnalysisDone }: AnalysisResul
             </Card>
           )}
 
-          {/* ④ 問題点 */}
           {parsed.problems.length > 0 && (
             <Card>
               <CardContent className="pt-4">
@@ -329,7 +315,6 @@ export default function AnalysisResult({ frames, onAnalysisDone }: AnalysisResul
             </Card>
           )}
 
-          {/* ⑤ 改善方法 */}
           {parsed.solutions.length > 0 && (
             <Card>
               <CardContent className="pt-4">
@@ -346,7 +331,6 @@ export default function AnalysisResult({ frames, onAnalysisDone }: AnalysisResul
             </Card>
           )}
 
-          {/* ⑥ 総評 */}
           {parsed.review && (
             <Card>
               <CardContent className="pt-4">
@@ -358,7 +342,6 @@ export default function AnalysisResult({ frames, onAnalysisDone }: AnalysisResul
         </div>
       )}
 
-      {/* エラー */}
       {status === "error" && (
         <div className="flex items-start gap-3 p-4 bg-red-50 rounded-2xl border border-red-100">
           <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
@@ -370,7 +353,6 @@ export default function AnalysisResult({ frames, onAnalysisDone }: AnalysisResul
           </div>
         </div>
       )}
-
     </div>
   );
 }

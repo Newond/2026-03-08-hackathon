@@ -59,7 +59,6 @@ export default function FrameExtractor({ videoUrl, onFramesReady }: FrameExtract
           抽出した画像をAIに送って介助動作を分析します。
         </p>
 
-        {/* プログレスバー */}
         {isExtracting && (
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between text-xs text-slate-500">
@@ -78,7 +77,6 @@ export default function FrameExtractor({ videoUrl, onFramesReady }: FrameExtract
           </div>
         )}
 
-        {/* 抽出ボタン */}
         {!done && (
           <button
             onClick={handleExtract}
@@ -95,7 +93,6 @@ export default function FrameExtractor({ videoUrl, onFramesReady }: FrameExtract
         )}
       </div>
 
-      {/* フレームプレビューグリッド */}
       {frames.length > 0 && (
         <div className="flex flex-col gap-3">
           <p className="text-sm font-medium text-slate-700">
@@ -125,7 +122,6 @@ export default function FrameExtractor({ videoUrl, onFramesReady }: FrameExtract
         </div>
       )}
 
-      {/* 次へボタン */}
       {done && (
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2 text-sm text-emerald-600 font-medium">

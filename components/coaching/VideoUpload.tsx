@@ -76,7 +76,6 @@ export default function VideoUpload({ onVideoReady }: VideoUploadProps) {
   return (
     <div className="flex flex-col gap-4">
       {!videoUrl ? (
-        /* ── ドロップゾーン ── */
         <div
           onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
           onDragLeave={() => setIsDragging(false)}
@@ -115,9 +114,7 @@ export default function VideoUpload({ onVideoReady }: VideoUploadProps) {
           />
         </div>
       ) : (
-        /* ── 動画プレイヤー ── */
         <div className="flex flex-col gap-3">
-          {/* 動画本体 */}
           <div className="relative rounded-2xl overflow-hidden bg-black aspect-video">
             <video
               ref={videoRef}
@@ -128,7 +125,6 @@ export default function VideoUpload({ onVideoReady }: VideoUploadProps) {
               onEnded={() => setIsPlaying(false)}
               playsInline
             />
-            {/* 中央再生ボタン（一時停止時のみ） */}
             {!isPlaying && (
               <button
                 onClick={togglePlay}
@@ -140,16 +136,11 @@ export default function VideoUpload({ onVideoReady }: VideoUploadProps) {
               </button>
             )}
           </div>
-
-          {/* コントロールバー */}
           <div className="bg-white rounded-xl border border-slate-100 p-3 flex flex-col gap-2">
-            {/* ファイル名 */}
             <div className="flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
               <span className="text-xs text-slate-600 truncate font-medium">{fileName}</span>
             </div>
-
-            {/* プログレスバー */}
             <div
               className="w-full h-1.5 bg-slate-100 rounded-full cursor-pointer"
               onClick={(e) => {
@@ -165,8 +156,6 @@ export default function VideoUpload({ onVideoReady }: VideoUploadProps) {
                 style={{ width: `${progress}%` }}
               />
             </div>
-
-            {/* 再生ボタン + 時間 */}
             <div className="flex items-center gap-3">
               <button
                 onClick={togglePlay}
