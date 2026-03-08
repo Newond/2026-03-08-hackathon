@@ -5,7 +5,8 @@
       "Bash(npx next:*)",
       "Bash(git:*)",
       "Bash(npx wrangler:*)",
-      "Bash(npx:*)"
+      "Bash(npx:*)",
+      "WebFetch(domain:qiita.com)"
     ]
   }
 }
