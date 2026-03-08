@@ -21,7 +21,7 @@ export default function VideoUpload({ onVideoReady }: VideoUploadProps) {
   const handleFile = useCallback(
     (file: File) => {
       if (!file.type.startsWith("video/")) {
-        alert("動画ファイル（mp4, movなど）を選択してください");
+        alert("Please select a video file (mp4, mov, etc.)");
         return;
       }
       const url = URL.createObjectURL(file);
@@ -92,15 +92,15 @@ export default function VideoUpload({ onVideoReady }: VideoUploadProps) {
             <FileVideo className="w-7 h-7 text-sky-500" strokeWidth={1.8} />
           </div>
           <div className="text-center">
-            <p className="font-semibold text-slate-700">動画をアップロード</p>
+            <p className="font-semibold text-slate-700">Upload Video</p>
             <p className="text-sm text-slate-400 mt-1">
-              タップまたはドラッグ＆ドロップ
+              Tap or drag &amp; drop
             </p>
-            <p className="text-xs text-slate-400 mt-0.5">mp4, mov, avi 対応</p>
+            <p className="text-xs text-slate-400 mt-0.5">Supports mp4, mov, avi</p>
           </div>
           <div className="flex items-center gap-2 mt-1 px-5 py-2 bg-sky-500 rounded-full">
             <Upload className="w-4 h-4 text-white" />
-            <span className="text-white text-sm font-medium">ファイルを選択</span>
+            <span className="text-white text-sm font-medium">Choose File</span>
           </div>
           <input
             ref={fileInputRef}
@@ -175,7 +175,7 @@ export default function VideoUpload({ onVideoReady }: VideoUploadProps) {
                 className="ml-auto flex items-center gap-1 text-xs text-slate-400 hover:text-slate-600"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
-                別の動画
+                Change video
               </button>
             </div>
           </div>

@@ -32,7 +32,7 @@ export default function FrameExtractor({ videoUrl, onFramesReady }: FrameExtract
       onFramesReady(result);
     } catch (e) {
       console.error(e);
-      alert("フレーム抽出に失敗しました。別の動画をお試しください。");
+      alert("Frame extraction failed. Please try a different video.");
     } finally {
       setIsExtracting(false);
     }
@@ -50,13 +50,13 @@ export default function FrameExtractor({ videoUrl, onFramesReady }: FrameExtract
         <span className="w-5 h-5 rounded-full bg-sky-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
           2
         </span>
-        <h2 className="font-semibold text-slate-800">フレーム抽出</h2>
+        <h2 className="font-semibold text-slate-800">Frame Extraction</h2>
       </div>
 
       <div className="bg-slate-50 rounded-2xl p-4 flex flex-col gap-3 border border-slate-100">
         <p className="text-sm text-slate-600">
-          動画から <span className="font-semibold text-slate-800">{FRAME_COUNT}枚</span> のフレームを均等間隔で抽出します。
-          抽出した画像をAIに送って介助動作を分析します。
+          Extracts <span className="font-semibold text-slate-800">{FRAME_COUNT} frames</span> at equal intervals from the video.
+          These frames will be sent to AI for caregiving technique analysis.
         </p>
 
         {isExtracting && (
@@ -64,7 +64,7 @@ export default function FrameExtractor({ videoUrl, onFramesReady }: FrameExtract
             <div className="flex items-center justify-between text-xs text-slate-500">
               <span className="flex items-center gap-1">
                 <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                抽出中…
+                Extracting...
               </span>
               <span>{progress}%</span>
             </div>
@@ -88,7 +88,7 @@ export default function FrameExtractor({ videoUrl, onFramesReady }: FrameExtract
             ) : (
               <ScanSearch className="w-4 h-4" />
             )}
-            {isExtracting ? "処理中…" : "フレームを抽出する"}
+            {isExtracting ? "Processing..." : "Extract Frames"}
           </button>
         )}
       </div>
@@ -96,7 +96,7 @@ export default function FrameExtractor({ videoUrl, onFramesReady }: FrameExtract
       {frames.length > 0 && (
         <div className="flex flex-col gap-3">
           <p className="text-sm font-medium text-slate-700">
-            抽出されたフレーム（{frames.length}枚）
+            Extracted Frames ({frames.length})
           </p>
           <div className="grid grid-cols-4 gap-2">
             {frames.map((frame, i) => (
@@ -126,13 +126,13 @@ export default function FrameExtractor({ videoUrl, onFramesReady }: FrameExtract
         <div className="flex flex-col gap-2">
           <div className="flex items-center gap-2 text-sm text-emerald-600 font-medium">
             <span className="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 text-xs font-bold">✓</span>
-            {frames.length}枚のフレーム抽出が完了しました
+            {frames.length} frames extracted successfully
           </div>
           <button
             onClick={() => onFramesReady(frames)}
             className="flex items-center justify-center gap-2 w-full py-3.5 bg-sky-500 hover:bg-sky-400 text-white font-semibold rounded-2xl transition-colors"
           >
-            次へ：AI分析へ
+            Next: AI Analysis
             <ChevronRight className="w-5 h-5" />
           </button>
         </div>

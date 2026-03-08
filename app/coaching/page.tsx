@@ -8,9 +8,9 @@ import AnalysisResult from "@/components/coaching/AnalysisResult";
 import { type ExtractedFrame } from "@/lib/extractFrames";
 
 const STEPS = [
-  { id: 1, icon: FileVideo,  label: "動画読み込み" },
-  { id: 2, icon: ScanSearch, label: "フレーム抽出" },
-  { id: 3, icon: AlignLeft,  label: "AI分析" },
+  { id: 1, icon: FileVideo,  label: "Upload" },
+  { id: 2, icon: ScanSearch, label: "Extract" },
+  { id: 3, icon: AlignLeft,  label: "Analyze" },
 ];
 
 export default function CoachingPage() {
@@ -21,9 +21,9 @@ export default function CoachingPage() {
   return (
     <div className="flex flex-col gap-5 px-4 pt-4 pb-6">
       <div>
-        <h1 className="text-xl font-bold text-slate-900">介助動作 コーチング</h1>
+        <h1 className="text-xl font-bold text-slate-900">Caregiving Coaching</h1>
         <p className="text-sm text-slate-500 mt-0.5">
-          動画をアップロードしてAIが改善点をフィードバックします
+          Upload a video and get AI feedback on your technique
         </p>
       </div>
 
@@ -73,7 +73,7 @@ export default function CoachingPage() {
             <span className="w-5 h-5 rounded-full bg-sky-500 text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
               1
             </span>
-            <h2 className="font-semibold text-slate-800">動画を読み込む</h2>
+            <h2 className="font-semibold text-slate-800">Upload Video</h2>
           </div>
           <VideoUpload onVideoReady={(_file, url) => {
             setVideoUrl(url);
