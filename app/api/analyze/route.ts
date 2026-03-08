@@ -1,6 +1,5 @@
 export const runtime = "edge";
 
-import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest } from "next/server";
 import {
   COACHING_SYSTEM_PROMPT,
@@ -15,53 +14,66 @@ export async function POST(req: NextRequest) {
     };
 
     if (!frames || frames.length === 0) {
-      return new Response("フレームがありません", { status: 400 });
+      return new Response("No frames provided", { status: 400 });
     }
 
     const key = apiKey || process.env.ANTHROPIC_API_KEY;
     if (!key) {
-      return new Response("APIキーが設定されていません", { status: 401 });
+      return new Response("API key not configured", { status: 401 });
     }
 
-    const client = new Anthropic({ apiKey: key });
-
-    // フレーム番号のラベルを挿入
-    const contentBlocks: Anthropic.ContentBlockParam[] = [];
+    // Build content blocks
+    const content: unknown[] = [];
     frames.forEach((base64, i) => {
-      contentBlocks.push({
-        type: "text",
-        text: `【フレーム ${i + 1}】`,
-      });
-      contentBlocks.push({
+      content.push({ type: "text", text: `[Frame ${i + 1}]` });
+      content.push({
         type: "image",
         source: {
           type: "base64",
           media_type: "image/jpeg",
           data: base64,
         },
-      } as Anthropic.ImageBlockParam);
+      });
     });
-    contentBlocks.push({
-      type: "text",
-      text: COACHING_USER_MESSAGE,
+    content.push({ type: "text", text: COACHING_USER_MESSAGE });
+
+    // Call Anthropic API directly via fetch
+    const apiRes = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": key,
+        "anthropic-version": "2023-06-01",
+      },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1500,
+        system: COACHING_SYSTEM_PROMPT,
+        messages: [{ role: "user", content }],
+      }),
     });
 
-    const response = await client.messages.create({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1500,
-      system: COACHING_SYSTEM_PROMPT,
-      messages: [{ role: "user", content: contentBlocks }],
-    });
+    if (!apiRes.ok) {
+      const errBody = await apiRes.text();
+      console.error("Anthropic API error:", apiRes.status, errBody);
+      return new Response(`Anthropic API error: ${apiRes.status} - ${errBody}`, {
+        status: apiRes.status,
+      });
+    }
 
-    const text = response.content
-      .map((c) => (c.type === "text" ? c.text : ""))
+    const data = (await apiRes.json()) as {
+      content: { type: string; text?: string }[];
+    };
+    const text = data.content
+      .map((c) => (c.type === "text" ? c.text ?? "" : ""))
       .join("");
 
     return new Response(text, {
       headers: { "Content-Type": "text/plain; charset=utf-8" },
     });
   } catch (e) {
-    console.error(e);
-    return new Response("分析中にエラーが発生しました", { status: 500 });
+    const msg = e instanceof Error ? e.message : String(e);
+    console.error("analyze error:", msg);
+    return new Response(`Analysis error: ${msg}`, { status: 500 });
   }
 }

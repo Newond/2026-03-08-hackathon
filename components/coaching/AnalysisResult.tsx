@@ -163,7 +163,8 @@ export default function AnalysisResult({ frames, onAnalysisDone }: AnalysisResul
       onAnalysisDone(fullText);
     } catch (e) {
       console.error(e);
-      setErrorMsg("Analysis failed. Please try again.");
+      const detail = e instanceof Error ? e.message : String(e);
+      setErrorMsg(`Analysis failed: ${detail}`);
       setStatus("error");
     }
   }, [frames, onAnalysisDone, apiKey]);
