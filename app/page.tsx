@@ -1,12 +1,12 @@
 "use client";
 
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { type PoseAngles } from "@/lib/pose/angle-calculator";
 import {
   WARN_ANGLE,
   DANGER_ANGLE,
   CONSECUTIVE_FRAMES_THRESHOLD,
-  LLM_COOLDOWN,
+  AUTO_ANALYZE_INTERVAL,
 } from "@/lib/pose/constants";
 import {
   parsePostureResponse,
@@ -24,17 +24,20 @@ export default function HomePage() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [captureRequested, setCaptureRequested] = useState(false);
   const [result, setResult] = useState<PostureAnalysisResult | null>(null);
-  const [sheetOpen, setSheetOpen] = useState(false);
 
   // 連続フレーム数（ref で管理して再レンダリングを抑える）
   const consecutiveRef = useRef(0);
-  const lastLLMTimeRef = useRef(0);
   const [consecutiveDisplay, setConsecutiveDisplay] = useState(0);
 
-  // 角度更新 + 自動トリガー判定
+  // 最新の角度を ref で保持（タイマーコールバックから参照するため）
+  const anglesRef = useRef<PoseAngles>({ trunk: null, neck: null });
+  const isAnalyzingRef = useRef(false);
+
+  // 角度更新
   const handleAnglesUpdate = useCallback(
     (newAngles: PoseAngles) => {
       setAngles(newAngles);
+      anglesRef.current = newAngles;
 
       if (newAngles.trunk === null) {
         consecutiveRef.current = 0;
@@ -42,39 +45,27 @@ export default function HomePage() {
         return;
       }
 
-      // 連続フレームカウント
+      // 連続フレームカウント（HUD表示用）
       if (newAngles.trunk >= DANGER_ANGLE) {
         consecutiveRef.current++;
       } else if (newAngles.trunk < WARN_ANGLE) {
         consecutiveRef.current = Math.max(0, consecutiveRef.current - 1);
       }
-      // WARN_ANGLE <= trunk < DANGER_ANGLE → 凍結
 
       setConsecutiveDisplay(consecutiveRef.current);
-
-      // 自動トリガー
-      if (
-        consecutiveRef.current >= CONSECUTIVE_FRAMES_THRESHOLD &&
-        Date.now() - lastLLMTimeRef.current >= LLM_COOLDOWN &&
-        !isAnalyzing &&
-        isKeySet
-      ) {
-        triggerAnalysis();
-      }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [isAnalyzing, isKeySet]
+    []
   );
 
   // 分析トリガー
   const triggerAnalysis = useCallback(() => {
-    if (isAnalyzing || !isKeySet) return;
+    if (isAnalyzingRef.current || !isKeySet) return;
     setIsAnalyzing(true);
-    lastLLMTimeRef.current = Date.now();
+    isAnalyzingRef.current = true;
     consecutiveRef.current = 0;
     setConsecutiveDisplay(0);
     setCaptureRequested(true);
-  }, [isAnalyzing, isKeySet]);
+  }, [isKeySet]);
 
   // キャプチャ完了 → API呼び出し
   const handleCaptured = useCallback(
@@ -82,13 +73,14 @@ export default function HomePage() {
       setCaptureRequested(false);
 
       try {
+        const currentAngles = anglesRef.current;
         const res = await fetch("/api/realtime-analyze", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             frame: base64,
-            trunkAngle: angles.trunk,
-            neckAngle: angles.neck,
+            trunkAngle: currentAngles.trunk,
+            neckAngle: currentAngles.neck,
             apiKey,
           }),
         });
@@ -98,15 +90,28 @@ export default function HomePage() {
         const text = await res.text();
         const parsed = parsePostureResponse(text);
         setResult(parsed);
-        setSheetOpen(true);
       } catch (e) {
         console.error("Analysis error:", e);
       } finally {
         setIsAnalyzing(false);
+        isAnalyzingRef.current = false;
       }
     },
-    [angles, apiKey]
+    [apiKey]
   );
+
+  // 2秒ごとの自動分析タイマー
+  useEffect(() => {
+    if (!cameraActive || !isKeySet) return;
+
+    const timer = setInterval(() => {
+      if (!isAnalyzingRef.current) {
+        triggerAnalysis();
+      }
+    }, AUTO_ANALYZE_INTERVAL);
+
+    return () => clearInterval(timer);
+  }, [cameraActive, isKeySet, triggerAnalysis]);
 
   return (
     <div className="relative w-full h-[calc(100dvh-3.5rem-4rem)] bg-slate-900 rounded-2xl overflow-hidden mx-auto max-w-lg">
@@ -135,13 +140,13 @@ export default function HomePage() {
         />
       )}
 
-      {/* 結果ボトムシート */}
+      {/* 結果表示（常時表示 + 自動音声読み上げ） */}
       <ResultSheet
         result={result}
         trunkAngle={angles.trunk}
         neckAngle={angles.neck}
-        open={sheetOpen}
-        onClose={() => setSheetOpen(false)}
+        open={result !== null}
+        onClose={() => setResult(null)}
       />
     </div>
   );

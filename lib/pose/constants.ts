@@ -12,6 +12,9 @@ export const CONSECUTIVE_FRAMES_THRESHOLD = 18;
 /** LLM呼び出しのクールダウン（ms） */
 export const LLM_COOLDOWN = 15000;
 
+/** 自動分析の間隔（ms）— 2秒ごとにAPI呼び出し */
+export const AUTO_ANALYZE_INTERVAL = 2000;
+
 /** MediaPipe検出間隔（ms） ≈ 15fps */
 export const DETECT_INTERVAL = 66;
 

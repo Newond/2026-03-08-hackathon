@@ -5,7 +5,7 @@ import BottomNav from "@/components/BottomNav";
 import { ApiKeyProvider } from "@/lib/api-key-context";
 
 export const metadata: Metadata = {
-  title: "Care Posture Assist — AI Body Mechanics Coach",
+  title: "Helper Helper — AI Body Mechanics Coach",
   description: "Real-time AI posture analysis and video coaching for caregivers",
 };
 

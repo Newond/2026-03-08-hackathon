@@ -12,7 +12,7 @@ export default function Header() {
           </div>
           <div>
             <span className="font-semibold text-slate-900 text-sm leading-none">
-              Care Posture Assist
+              Helper Helper
             </span>
             <span className="block text-[10px] text-slate-400 leading-none mt-0.5">
               AI Body Mechanics Coach
