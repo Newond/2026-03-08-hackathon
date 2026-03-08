@@ -28,7 +28,7 @@ export default function CoachingPage() {
       </div>
 
       {/* ステップインジケーター */}
-      <div className="flex items-center gap-1">
+      <div className="flex items-center justify-center gap-1">
         {STEPS.map((step, i) => {
           const Icon = step.icon;
           const done = currentStep > step.id;
