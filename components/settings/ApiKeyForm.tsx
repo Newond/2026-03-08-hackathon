@@ -32,10 +32,10 @@ export default function ApiKeyForm() {
           </div>
           <div>
             <p className="text-sm font-semibold text-slate-900">
-              Anthropic API キー
+              Anthropic API Key
             </p>
             <p className="text-xs text-slate-400">
-              セッション中のみ保持されます
+              Stored for this session only
             </p>
           </div>
         </div>
@@ -71,14 +71,14 @@ export default function ApiKeyForm() {
               disabled={!inputValue.trim() || inputValue.trim() === apiKey}
               className="flex-1 py-2.5 bg-sky-500 hover:bg-sky-400 disabled:opacity-40 text-white text-sm font-semibold rounded-xl transition-colors"
             >
-              {saved ? "保存しました" : "保存"}
+              {saved ? "Saved" : "Save"}
             </button>
             {isKeySet && (
               <button
                 onClick={handleClear}
                 className="px-4 py-2.5 border border-slate-200 text-slate-600 text-sm font-medium rounded-xl hover:bg-slate-50 transition-colors"
               >
-                クリア
+                Clear
               </button>
             )}
           </div>
@@ -86,7 +86,7 @@ export default function ApiKeyForm() {
           {isKeySet && (
             <div className="flex items-center gap-1.5 text-xs text-emerald-600">
               <CheckCircle2 className="w-3.5 h-3.5" />
-              APIキーが設定されています
+              API key is configured
             </div>
           )}
         </div>

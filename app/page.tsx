@@ -100,7 +100,7 @@ export default function HomePage() {
         setResult(parsed);
         setSheetOpen(true);
       } catch (e) {
-        console.error("分析エラー:", e);
+        console.error("Analysis error:", e);
       } finally {
         setIsAnalyzing(false);
       }
@@ -113,7 +113,7 @@ export default function HomePage() {
       {/* APIキー未設定の警告 */}
       {!isKeySet && cameraActive && (
         <div className="absolute top-12 left-4 right-4 z-30 bg-amber-500/90 backdrop-blur-sm text-white text-xs font-medium px-3 py-2 rounded-lg text-center">
-          設定画面でAPIキーを入力すると分析機能が使えます
+          Set your API key in Settings to enable analysis
         </div>
       )}
 

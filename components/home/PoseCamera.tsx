@@ -35,7 +35,7 @@ export default function PoseCamera({
   const streamRef = useRef<MediaStream | null>(null);
 
   const [loading, setLoading] = useState(true);
-  const [loadingMsg, setLoadingMsg] = useState("MediaPipe モデルを読み込み中…");
+  const [loadingMsg, setLoadingMsg] = useState("Loading MediaPipe model…");
   const [error, setError] = useState("");
   const [cameraActive, setCameraActive] = useState(false);
 
@@ -45,14 +45,14 @@ export default function PoseCamera({
 
     async function initMediaPipe() {
       try {
-        setLoadingMsg("MediaPipe ランタイムを準備中…");
+        setLoadingMsg("Preparing MediaPipe runtime…");
         const cdnUrl = "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/vision_bundle.mjs";
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const vision: any = await (new Function("url", "return import(url)"))(cdnUrl);
 
         if (cancelled) return;
 
-        setLoadingMsg("Pose Landmarker モデルを読み込み中…");
+        setLoadingMsg("Loading Pose Landmarker model…");
         const poseLandmarker = await vision.PoseLandmarker.createFromOptions(
           await vision.FilesetResolver.forVisionTasks(
             "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.14/wasm"
@@ -77,7 +77,7 @@ export default function PoseCamera({
         const PoseLandmarkerClass = vision.PoseLandmarker;
 
         // カメラ起動
-        setLoadingMsg("カメラを起動中…");
+        setLoadingMsg("Starting camera…");
         const stream = await navigator.mediaDevices.getUserMedia({
           video: {
             facingMode: { ideal: "environment" },
@@ -152,8 +152,8 @@ export default function PoseCamera({
         renderLoop();
       } catch (e) {
         if (cancelled) return;
-        const msg = e instanceof Error ? e.message : "不明なエラー";
-        setError(`初期化に失敗しました: ${msg}`);
+        const msg = e instanceof Error ? e.message : "Unknown error";
+        setError(`Initialization failed: ${msg}`);
         setLoading(false);
       }
     }

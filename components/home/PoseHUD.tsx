@@ -23,10 +23,10 @@ function getColor(trunkAngle: number | null): string {
 }
 
 function getStatusText(trunkAngle: number | null): string {
-  if (trunkAngle === null) return "検出不可";
-  if (trunkAngle >= DANGER_ANGLE) return "危険：前傾しすぎです";
-  if (trunkAngle >= WARN_ANGLE) return "注意：前傾気味です";
-  return "良好な姿勢";
+  if (trunkAngle === null) return "No Detection";
+  if (trunkAngle >= DANGER_ANGLE) return "Danger: Excessive Forward Lean";
+  if (trunkAngle >= WARN_ANGLE) return "Caution: Leaning Forward";
+  return "Good Posture";
 }
 
 export default function PoseHUD({
@@ -81,13 +81,13 @@ export default function PoseHUD({
             >
               {angles.trunk !== null ? `${angles.trunk}°` : "--"}
             </span>
-            <span className="text-[10px] text-slate-400">体幹角</span>
+            <span className="text-[10px] text-slate-400">Trunk</span>
           </div>
         </div>
 
         {/* 頸部角バッジ */}
         <div className="bg-black/60 backdrop-blur-sm px-3.5 py-2 rounded-xl text-center pointer-events-auto">
-          <div className="text-[10px] text-slate-400">頸部角</div>
+          <div className="text-[10px] text-slate-400">Neck</div>
           <div className="text-lg font-bold text-white">
             {angles.neck !== null ? `${angles.neck}°` : "--"}
           </div>
@@ -132,7 +132,7 @@ export default function PoseHUD({
               : "bg-emerald-500/30 border-emerald-500 text-emerald-300 hover:bg-emerald-500/40"
           }`}
         >
-          {isAnalyzing ? "分析中…" : "📊 分析"}
+          {isAnalyzing ? "Analyzing…" : "📊 Analyze"}
         </button>
       </div>
     </>

@@ -1,3 +1,5 @@
+export const runtime = "edge";
+
 import Anthropic from "@anthropic-ai/sdk";
 import { NextRequest } from "next/server";
 import {
@@ -16,12 +18,12 @@ export async function POST(req: NextRequest) {
     };
 
     if (!frame) {
-      return new Response("フレームがありません", { status: 400 });
+      return new Response("No frame provided", { status: 400 });
     }
 
     const key = apiKey || process.env.ANTHROPIC_API_KEY;
     if (!key) {
-      return new Response("APIキーが設定されていません", { status: 401 });
+      return new Response("API key not configured", { status: 401 });
     }
 
     const client = new Anthropic({ apiKey: key });
@@ -62,7 +64,7 @@ export async function POST(req: NextRequest) {
     });
   } catch (e) {
     console.error(e);
-    return new Response("リアルタイム分析中にエラーが発生しました", {
+    return new Response("Error during real-time analysis", {
       status: 500,
     });
   }

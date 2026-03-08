@@ -15,7 +15,7 @@ export default function Header() {
               Care Posture Assist
             </span>
             <span className="block text-[10px] text-slate-400 leading-none mt-0.5">
-              介護姿勢アシスト
+              AI Body Mechanics Coach
             </span>
           </div>
         </div>

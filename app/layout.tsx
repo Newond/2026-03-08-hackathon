@@ -5,8 +5,8 @@ import BottomNav from "@/components/BottomNav";
 import { ApiKeyProvider } from "@/lib/api-key-context";
 
 export const metadata: Metadata = {
-  title: "Care Posture Assist — 介護姿勢アシスト",
-  description: "AIによるリアルタイム介護姿勢分析と動画コーチング",
+  title: "Care Posture Assist — AI Body Mechanics Coach",
+  description: "Real-time AI posture analysis and video coaching for caregivers",
 };
 
 export const viewport: Viewport = {
@@ -23,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja">
+    <html lang="en">
       <body className="antialiased bg-slate-50 min-h-screen">
         <ApiKeyProvider>
           <div className="flex flex-col min-h-screen max-w-lg mx-auto">

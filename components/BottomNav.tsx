@@ -6,9 +6,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { icon: Home,         label: "ホーム",      href: "/" },
-  { icon: Stethoscope,  label: "コーチング",  href: "/coaching" },
-  { icon: Settings,     label: "設定",        href: "/settings" },
+  { icon: Home,         label: "Home",      href: "/" },
+  { icon: Stethoscope,  label: "Coaching",  href: "/coaching" },
+  { icon: Settings,     label: "Settings",  href: "/settings" },
 ];
 
 export default function BottomNav() {
