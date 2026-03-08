@@ -154,16 +154,8 @@ export default function AnalysisResult({ frames, onAnalysisDone }: AnalysisResul
 
       if (!res.ok) throw new Error(await res.text());
 
-      const reader = res.body!.getReader();
-      const decoder = new TextDecoder();
-      let fullText = "";
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        fullText += decoder.decode(value, { stream: true });
-        setRawText(fullText);
-      }
+      const fullText = await res.text();
+      setRawText(fullText);
 
       const p = parseAnalysis(fullText);
       setParsed(p);
