@@ -51,18 +51,24 @@ function parseAnalysis(raw: string): ParsedAnalysis {
     }
 
     if (section === "Overall Score") {
-      const m = trimmed.match(/SCORE:(\d+)/);
+      const m = trimmed.match(/SCORE:\s*(\d+)/);
       if (m) result.totalScore = parseInt(m[1]);
+      // Also try plain number fallback (e.g. "75" or "75/100")
+      if (!result.totalScore) {
+        const n = trimmed.match(/^(\d+)/);
+        if (n) result.totalScore = parseInt(n[1]);
+      }
       continue;
     }
 
     if (section === "Category Scores") {
-      const m = trimmed.match(/CATEGORY:(.+):(\d+):(High|Medium|Low)/);
+      const m = trimmed.match(/CATEGORY:\s*(.+?)\s*:\s*(\d+)\s*:\s*(High|Medium|Low)/i);
       if (m) {
+        const imp = m[3].charAt(0).toUpperCase() + m[3].slice(1).toLowerCase();
         result.categories.push({
-          name: m[1],
+          name: m[1].trim(),
           score: parseInt(m[2]),
-          importance: m[3] as Importance,
+          importance: imp as Importance,
         });
       }
       continue;
