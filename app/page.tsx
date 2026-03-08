@@ -117,8 +117,11 @@ export default function HomePage() {
     <div className="relative w-full h-[calc(100dvh-3.5rem-4rem)] bg-slate-900 rounded-2xl overflow-hidden mx-auto max-w-lg">
       {/* APIキー未設定の警告 */}
       {!isKeySet && cameraActive && (
-        <div className="absolute top-12 left-4 right-4 z-30 bg-amber-500/90 backdrop-blur-sm text-white text-xs font-medium px-3 py-2 rounded-lg text-center">
-          Set your API key in Settings to enable analysis
+        <div className="absolute top-12 left-4 right-4 z-30 bg-amber-900/85 backdrop-blur-sm text-white text-sm px-4 py-3 rounded-xl text-center flex flex-col gap-1">
+          <span className="font-semibold">Voice Assistant Unavailable</span>
+          <span className="text-xs text-amber-200">
+            Please register your API key in the Settings tab to enable AI-powered voice assistance.
+          </span>
         </div>
       )}
 

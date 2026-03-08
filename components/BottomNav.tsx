@@ -1,12 +1,12 @@
 "use client";
 
-import { Home, Stethoscope, Settings } from "lucide-react";
+import { Radio, Stethoscope, Settings } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const navItems = [
-  { icon: Home,         label: "Home",      href: "/" },
+  { icon: Radio,        label: "Live",       href: "/" },
   { icon: Stethoscope,  label: "Coaching",  href: "/coaching" },
   { icon: Settings,     label: "Settings",  href: "/settings" },
 ];
